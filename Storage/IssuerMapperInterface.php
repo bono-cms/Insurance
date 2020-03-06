@@ -13,5 +13,10 @@ namespace Insurance\Storage;
 
 interface IssuerMapperInterface
 {
-    
+    /**
+     * Fetch all issuers
+     * 
+     * @return array
+     */
+    public function fetchAll();
 }

@@ -23,4 +23,19 @@ final class IssuerMapper extends AbstractMapper implements IssuerMapperInterface
     {
         return self::getWithPrefix('bono_module_insurance_issuer');
     }
+
+    /**
+     * Fetch all issuers
+     * 
+     * @return array
+     */
+    public function fetchAll()
+    {
+        $db = $this->db->select('*')
+                       ->from(self::getTableName())
+                       ->orderBy('id')
+                       ->desc();
+
+        return $db->queryAll();
+    }
 }
