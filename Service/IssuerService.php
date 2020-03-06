@@ -9,7 +9,7 @@
  * the license file that was distributed with this source code.
  */
 
-namespace Insurance;
+namespace Insurance\Service;
 
 use Insurance\Storage\IssuerMapperInterface;
 use Cms\Service\AbstractManager;
