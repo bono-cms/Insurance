@@ -1,0 +1,32 @@
+<?php
+
+use Krystal\Form\Element;
+
+?>
+
+<form class="card" data-group="issuer" autocomplete="off">
+    <?= Element::hidden('issuer[id]', $issuer->getId()); ?>
+
+    <div class="form-group">
+        <label><?php $this->show('Name'); ?></label>
+        <?= Element::text('issuer[name]', $issuer->getName(), ['class' => 'form-control']); ?>
+    </div>
+
+    <div class="form-group">
+        <label><?php $this->show('Phone'); ?></label>
+        <?= Element::text('issuer[phone]', $issuer->getPhone(), ['class' => 'form-control']); ?>
+    </div>
+
+    <div class="form-group">
+        <label><?php $this->show('Email'); ?></label>
+        <?= Element::text('issuer[email]', $issuer->getEmail(), ['class' => 'form-control']); ?>
+    </div>
+
+    <?php $this->loadPartial('actions', [
+        'new' => !$issuer->getId(),
+        'add' => 'Insurance:Admin:Issuer@addAction',
+        'edit' => 'Insurance:Admin:Issuer@editAction',
+        'save' => 'Insurance:Admin:Issuer@saveAction',
+        'cancel' => 'Insurance:Admin:Issuer@indexAction'
+    ]); ?>
+</form>
