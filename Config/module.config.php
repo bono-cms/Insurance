@@ -12,7 +12,7 @@ return [
         'icon' => 'fas fa-umbrella fa-5x',
         'items' => [
             [
-                'route' => '#',
+                'route' => 'Insurance:Admin:Issuer@indexAction',
                 'name' => 'View all policies'
             ]
         ]
