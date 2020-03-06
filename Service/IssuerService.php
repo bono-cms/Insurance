@@ -33,4 +33,47 @@ final class IssuerService extends AbstractManager
     {
         $this->issuerMapper = $issuerMapper;
     }
+
+    /**
+     * Returns last issuer id
+     * 
+     * @return mixed
+     */
+    public function getLastId()
+    {
+        return $this->issuerMapper->getLastId();
+    }
+
+    /**
+     * Persist an issuer
+     * 
+     * @param array $input Raw input data
+     * @return boolean
+     */
+    public function save(array $input)
+    {
+        return $this->issuerMapper->persist($input);
+    }
+
+    /**
+     * Deletes an issuer by their id
+     * 
+     * @param int $id Issuer id
+     * @return mixed
+     */
+    public function deleteById($id)
+    {
+        return $this->issuerMapper->deleteByPk($id);
+    }
+
+    /**
+     * Fetches an issuer by their id
+     * 
+     * @param int $id Issuer id
+     * @return mixed
+     */
+    public function fetchById($id)
+    {
+        return $this->issuerMapper->findByPk($id);
+    }
 }
