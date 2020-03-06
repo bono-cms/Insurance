@@ -13,6 +13,7 @@ namespace Insurance;
 
 use Insurance\Storage\IssuerMapperInterface;
 use Cms\Service\AbstractManager;
+use Krystal\Stdlib\VirtualEntity;
 
 final class IssuerService extends AbstractManager
 {
@@ -32,6 +33,20 @@ final class IssuerService extends AbstractManager
     public function __construct(IssuerMapperInterface $issuerMapper)
     {
         $this->issuerMapper = $issuerMapper;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function toEntity(array $row)
+    {
+        $entity = new VirtualEntity();
+        $entity->setId($row['id'])
+               ->setName($row['name'])
+               ->setPhone($row['phone'])
+               ->setEmail($row['email']);
+
+        return $entity;
     }
 
     /**
@@ -74,6 +89,6 @@ final class IssuerService extends AbstractManager
      */
     public function fetchById($id)
     {
-        return $this->issuerMapper->findByPk($id);
+        return $this->prepareResult($this->issuerMapper->findByPk($id));
     }
 }
