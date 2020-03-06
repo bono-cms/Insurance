@@ -24,5 +24,9 @@ return [
 
     '/%s/module/insurance/issuer/delete/(:var)' => [
         'controller' => 'Admin:Issuer@deleteAction'
+    ],
+
+    '/%s/module/insurance/issuer/save' => [
+        'controller' => 'Admin:Issuer@saveAction'
     ]
 ];
