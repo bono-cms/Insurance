@@ -27,7 +27,7 @@ final class Issuer extends AbstractController
         $this->view->getBreadcrumbBag()
                    ->addOne('Insurance');
 
-        return $this->view->render('index', [
+        return $this->view->render('issuer/index', [
             'issuers' => $this->getModuleService('issuerService')->fetchAll()
         ]);
     }
@@ -46,7 +46,7 @@ final class Issuer extends AbstractController
                    ->addOne('Insurance', 'Insurance:Issuer@indexAction')
                    ->addOne($title);
 
-        return $this->view->render('form', [
+        return $this->view->render('issuer/form', [
             'issuer' => $issuer
         ]);
     }
