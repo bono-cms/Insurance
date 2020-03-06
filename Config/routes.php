@@ -10,19 +10,19 @@
  */
 
 return [
-    '%s/module/insurance/issuer' => [
+    '/%s/module/insurance/issuer' => [
         'controller' => 'Admin:Issuer@indexAction'
     ],
 
-    '%s/module/insurance/issuer/add' => [
+    '/%s/module/insurance/issuer/add' => [
         'controller' => 'Admin:Issuer@addAction'
     ],
 
-    '%s/module/insurance/issuer/edit/(:var)' => [
+    '/%s/module/insurance/issuer/edit/(:var)' => [
         'controller' => 'Admin:Issuer@editAction'
     ],
 
-    '%s/module/insurance/issuer/delete/(:var)' => [
+    '/%s/module/insurance/issuer/delete/(:var)' => [
         'controller' => 'Admin:Issuer@deleteAction'
     ]
 ];
