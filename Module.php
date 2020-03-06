@@ -12,6 +12,7 @@
 namespace Insurance;
 
 use Cms\AbstractCmsModule;
+use Insurance\Service\IssuerService;
 
 final class Module extends AbstractCmsModule
 {
@@ -21,7 +22,7 @@ final class Module extends AbstractCmsModule
     public function getServiceProviders()
     {
         return [
-            
+            'issuerService' => new IssuerService($this->getMapper('\Insurance\Storage\MySQL\IssuerMapper'))
         ];
     }
 }
