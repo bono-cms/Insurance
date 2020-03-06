@@ -43,7 +43,7 @@ final class Issuer extends AbstractController
     {
         // Append breadcrumbs
         $this->view->getBreadcrumbBag()
-                   ->addOne('Insurance', 'Insurance:Issuer@indexAction')
+                   ->addOne('Insurance', 'Insurance:Admin:Issuer@indexAction')
                    ->addOne($title);
 
         return $this->view->render('issuer/form', [
