@@ -91,4 +91,14 @@ final class IssuerService extends AbstractManager
     {
         return $this->prepareResult($this->issuerMapper->findByPk($id));
     }
+
+    /**
+     * Fetch all issuers
+     * 
+     * @return array
+     */
+    public function fetchAll()
+    {
+        return $this->prepareResults($this->issuerMapper->fetchAll());
+    }
 }
