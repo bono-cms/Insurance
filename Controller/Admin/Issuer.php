@@ -89,6 +89,8 @@ final class Issuer extends AbstractController
     public function deleteAction($id)
     {
         $this->getModuleService('issuerService')->deleteById($id);
+
+        $this->flashBag->set('success', 'Selected issuer has been removed successfully');
         return 1;
     }
 
@@ -105,9 +107,11 @@ final class Issuer extends AbstractController
         $issuerService = $this->getModuleService('issuerService');
         $issuerService->save($data);
 
-        if (!empty($data['issuer']['id'])) {
+        if (!empty($data['id'])) {
+            $this->flashBag->set('success', 'The issuer has been updated successfully');
             return 1;
         } else {
+            $this->flashBag->set('success', 'The issuer has been created successfully');
             return $issuerService->getLastId();
         }
     }
