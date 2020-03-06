@@ -12,8 +12,9 @@
 namespace Insurance\Storage\MySQL;
 
 use Cms\Storage\MySQL\AbstractMapper;
+use Insurance\Storage\IssuerMapperInterface;
 
-final class IssuerMapper extends AbstractMapper
+final class IssuerMapper extends AbstractMapper implements IssuerMapperInterface
 {
     /**
      * {@inheritDoc}
