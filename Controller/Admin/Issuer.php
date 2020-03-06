@@ -41,7 +41,7 @@ final class Issuer extends AbstractController
      */
     private function createForm(VirtualEntity $issuer, $title)
     {
-        // Append a breadcrumb
+        // Append breadcrumbs
         $this->view->getBreadcrumbBag()
                    ->addOne('Insurance', 'Insurance:Issuer@indexAction')
                    ->addOne($title);
