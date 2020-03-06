@@ -14,6 +14,7 @@ namespace Insurance;
 use Insurance\Storage\IssuerMapperInterface;
 use Cms\Service\AbstractManager;
 use Krystal\Stdlib\VirtualEntity;
+use Krystal\Date\TimeHelper;
 
 final class IssuerService extends AbstractManager
 {
@@ -44,7 +45,8 @@ final class IssuerService extends AbstractManager
         $entity->setId($row['id'])
                ->setName($row['name'])
                ->setPhone($row['phone'])
-               ->setEmail($row['email']);
+               ->setEmail($row['email'])
+               ->setCreatedAt($row['created_at']);
 
         return $entity;
     }
@@ -67,6 +69,11 @@ final class IssuerService extends AbstractManager
      */
     public function save(array $input)
     {
+        // Add date with time on creation
+        if (empty($input['id'])){
+            $input['created_at'] = TimeHelper::getNow();
+        }
+
         return $this->issuerMapper->persist($input);
     }
 
