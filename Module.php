@@ -13,6 +13,7 @@ namespace Insurance;
 
 use Cms\AbstractCmsModule;
 use Insurance\Service\IssuerService;
+use Insurance\Service\IssuerClientService;
 
 final class Module extends AbstractCmsModule
 {
@@ -22,7 +23,8 @@ final class Module extends AbstractCmsModule
     public function getServiceProviders()
     {
         return [
-            'issuerService' => new IssuerService($this->getMapper('\Insurance\Storage\MySQL\IssuerMapper'))
+            'issuerService' => new IssuerService($this->getMapper('\Insurance\Storage\MySQL\IssuerMapper')),
+            'issuerClientService' => new IssuerClientService($this->getMapper('\Insurance\Storage\MySQL\IssuerClientMapper'))
         ];
     }
 }
