@@ -10,6 +10,7 @@
  */
 
 return [
+    // Issuer
     '/%s/module/insurance/issuer' => [
         'controller' => 'Admin:Issuer@indexAction'
     ],
@@ -28,5 +29,22 @@ return [
 
     '/%s/module/insurance/issuer/save' => [
         'controller' => 'Admin:Issuer@saveAction'
+    ],
+    
+    // Issuer client
+    '/%s/module/insurance/issuer-client/add/(:var)' => [
+        'controller' => 'Admin:IssuerClient@addAction'
+    ],
+
+    '/%s/module/insurance/issuer-client/edit/(:var)' => [
+        'controller' => 'Admin:IssuerClient@editAction'
+    ],
+
+    '/%s/module/insurance/issuer-client/delete/(:var)' => [
+        'controller' => 'Admin:IssuerClient@deleteAction'
+    ],
+    
+    '/%s/module/insurance/issuer-client/save' => [
+        'controller' => 'Admin:IssuerClient@saveAction'
     ]
 ];
