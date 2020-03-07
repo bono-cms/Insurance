@@ -13,5 +13,11 @@ namespace Insurance\Storage;
 
 interface IssuerClientMapperInterface
 {
-    
+    /**
+     * Fetch all issuers by client id
+     * 
+     * @param int $issuerId
+     * @return array
+     */
+    public function fetchAll($issuerId);
 }
