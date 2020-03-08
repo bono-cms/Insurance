@@ -1,0 +1,33 @@
+<?php
+
+use Krystal\Form\Element;
+
+?>
+
+<form class="card" data-group="client" autocomplete="off">
+    <?= Element::hidden('client[id]', $issuerClient->getId()); ?>
+    <?= Element::hidden('client[issuer_id]', $issuerClient->getIssuerId()); ?>
+
+    <div class="form-group">
+        <label><?php $this->show('Name'); ?></label>
+        <?= Element::text('client[name]', $issuerClient->getName(), ['class' => 'form-control']); ?>
+    </div>
+
+    <div class="form-group">
+        <label><?php $this->show('Passport'); ?></label>
+        <?= Element::text('client[passport]', $issuerClient->getPassport(), ['class' => 'form-control']); ?>
+    </div>
+
+    <div class="form-group">
+        <label><?php $this->show('Birthday'); ?></label>
+        <?= Element::date('client[birthday]', $issuerClient->getBirthday(), ['class' => 'form-control']); ?>
+    </div>
+
+    <?php $this->loadPartial('actions', [
+        'new' => !$issuerClient->getId(),
+        'add' => $this->url('Insurance:Admin:IssuerClient@addAction', $issuerClient->getIssuerId()),
+        'edit' => 'Insurance:Admin:IssuerClient@editAction',
+        'save' => 'Insurance:Admin:IssuerClient@saveAction',
+        'cancel' => $this->url('Insurance:Admin:Issuer@editAction', $issuerClient->getIssuerId())
+    ]); ?>
+</form>
