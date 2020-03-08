@@ -15,56 +15,58 @@ defined('KRYSTAL') or die;
 </div>
 
 <div class="card">
-    <?php $this->loadPartial('items-per-page', ['caption' => 'Issuers']); ?>
+    <h2><i class="fas fa-umbrella"></i> <?php $this->show('Issuers'); ?></h2>
 
-    <form>
-        <div class="table-responsive">
-            <?= $this->widget(new GridViewWidget($issuers, [
-                'batch' => true,
-                'pk' => 'id',
-                'tableClass' => 'table table-hover table-bordered table-striped',
-                'columns' => [
-                    [
-                        'column' => 'id',
-                        'label' => '#'
-                    ],
-
-                    [
-                        'column' => 'name'
-                    ],
-
-                    [
-                        'column' => 'phone'
-                    ],
-
-                    [
-                        'column' => 'email'
-                    ]
+    <div class="table-responsive mt-4">
+        <?= $this->widget(new GridViewWidget($issuers, [
+            'batch' => true,
+            'pk' => 'id',
+            'tableClass' => 'table table-hover table-bordered table-striped',
+            'columns' => [
+                [
+                    'column' => 'id',
+                    'label' => '#'
                 ],
 
-                'actions' => [
-                    'edit' => function($row){
-                        return Icon::edit(
-                            $this->url('Insurance:Admin:Issuer@editAction', $row['id']),
-                            $this->translate('Edit this issuer')
-                        );
-                    },
+                [
+                    'column' => 'name'
+                ],
 
-                    'remove' => function($row){
-                        return Icon::remove(
-                            $this->url('Insurance:Admin:Issuer@deleteAction', $row['id']),
-                            $this->translate('Remove this issuer')
-                        );
-                    }
+                [
+                    'column' => 'phone'
+                ],
+
+                [
+                    'column' => 'email'
+                ],
+                
+                [
+                    'column' => 'clients_count'
                 ]
-            ])); ?>
+            ],
 
-            <?php if (empty($issuers)): ?>
-            <div class="center-block">
-                <h2 class="text-center text-muted"><i class="fas fa-info-circle fa-2x"></i> <?php $this->show('No issuers'); ?></h2>
-            </div>
-            <?php endif; ?>
+            'actions' => [
+                'edit' => function($row){
+                    return Icon::edit(
+                        $this->url('Insurance:Admin:Issuer@editAction', $row['id']),
+                        $this->translate('Edit this issuer')
+                    );
+                },
 
+                'remove' => function($row){
+                    return Icon::remove(
+                        $this->url('Insurance:Admin:Issuer@deleteAction', $row['id']),
+                        $this->translate('Remove this issuer')
+                    );
+                }
+            ]
+        ])); ?>
+
+        <?php if (empty($issuers)): ?>
+        <div class="center-block">
+            <h2 class="text-center text-muted"><i class="fas fa-info-circle fa-2x"></i> <?php $this->show('No issuers'); ?></h2>
         </div>
-    </form>
+        <?php endif; ?>
+
+    </div>
 </div>
