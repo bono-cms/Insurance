@@ -78,6 +78,8 @@ final class IssuerClient extends AbstractController
     public function deleteAction($id)
     {
         $this->getModuleService('issuerClientService')->deleteById($id);
+
+        $this->flashBag->set('success', 'Selected issuer client has been removed successfully');
         return 1;
     }
 
@@ -94,8 +96,10 @@ final class IssuerClient extends AbstractController
         $issuerClientService->save($data);
 
         if (!empty($data['id'])) {
+            $this->flashBag->set('success', 'Issuer client has been updated successfully');
             return 1;
         } else {
+            $this->flashBag->set('success', 'Issuer client has been added successfully');
             return $issuerClientService->getLastId();
         }
     }
