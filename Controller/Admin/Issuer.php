@@ -47,7 +47,8 @@ final class Issuer extends AbstractController
                    ->addOne($title);
 
         return $this->view->render('issuer/form', [
-            'issuer' => $issuer
+            'issuer' => $issuer,
+            'clients' => $issuer->getId() ? $this->getModuleService('issuerClientService')->fetchAll($issuer->getId()) : []
         ]);
     }
 

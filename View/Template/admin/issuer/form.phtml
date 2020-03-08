@@ -1,32 +1,112 @@
 <?php
 
 use Krystal\Form\Element;
+use Krystal\Widget\GridView\GridViewWidget;
+use Cms\View\Icon;
 
 ?>
 
-<form class="card" data-group="issuer" autocomplete="off">
-    <?= Element::hidden('issuer[id]', $issuer->getId()); ?>
+<div class="card">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#issuer"><i class="fas fa-user-tie"></i> <?php $this->show('Issuer'); ?></a>
+      </li>
 
-    <div class="form-group">
-        <label><?php $this->show('Name'); ?></label>
-        <?= Element::text('issuer[name]', $issuer->getName(), ['class' => 'form-control']); ?>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#clients"><i class="fas fa-address-card"></i> <?php $this->show('Clients'); ?></a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="issuer">
+            <form data-group="issuer" autocomplete="off">
+                <?= Element::hidden('issuer[id]', $issuer->getId()); ?>
+
+                <div class="form-group">
+                    <label><?php $this->show('Name'); ?></label>
+                    <?= Element::text('issuer[name]', $issuer->getName(), ['class' => 'form-control']); ?>
+                </div>
+
+                <div class="form-group">
+                    <label><?php $this->show('Phone'); ?></label>
+                    <?= Element::text('issuer[phone]', $issuer->getPhone(), ['class' => 'form-control']); ?>
+                </div>
+
+                <div class="form-group">
+                    <label><?php $this->show('Email'); ?></label>
+                    <?= Element::text('issuer[email]', $issuer->getEmail(), ['class' => 'form-control']); ?>
+                </div>
+
+                <?php $this->loadPartial('actions', [
+                    'new' => !$issuer->getId(),
+                    'add' => 'Insurance:Admin:Issuer@addAction',
+                    'edit' => 'Insurance:Admin:Issuer@editAction',
+                    'save' => 'Insurance:Admin:Issuer@saveAction',
+                    'cancel' => 'Insurance:Admin:Issuer@indexAction'
+                ]); ?>
+            </form>
+        </div>
+
+        <div class="tab-pane fade" id="clients">
+            <div class="row mt-4 mb-4">
+                <div class="col-lg-10">
+                    <h2><i class="fas fa-address-card"></i> <?php $this->show('Clients'); ?> (<?= count($clients); ?>)</h2>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="btn-toolbar">
+                        <div class="btn-group mr-2">
+                            <a class="btn btn-primary" href="<?= $this->url('Insurance:Admin:IssuerClient@addAction', $issuer->getId()); ?>"><?php $this->show('Add new client'); ?></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <?= $this->widget(new GridViewWidget($clients, [
+                'tableClass' => 'table table-hover table-bordered table-striped',
+                'columns' => [
+                    [
+                        'column' => 'id',
+                        'label' => '#'
+                    ],
+
+                    [
+                        'column' => 'name'
+                    ],
+
+                    [
+                        'column' => 'passport'
+                    ],
+
+                    [
+                        'column' => 'birthday'
+                    ]
+                ],
+
+                'actions' => [
+                    'edit' => function($row){
+                        return Icon::edit(
+                            $this->url('Insurance:Admin:IssuerClient@editAction', $row['id']),
+                            $this->translate('Edit this client')
+                        );
+                    },
+
+                    'remove' => function($row){
+                        return Icon::remove(
+                            $this->url('Insurance:Admin:IssuerClient@deleteAction', $row['id']),
+                            $this->translate('Remove this client')
+                        );
+                    }
+                ]
+            ])); ?>
+
+            <?php if (empty($clients)): ?>
+            <div class="center-block">
+                <h2 class="text-center text-muted"><i class="fas fa-info-circle fa-2x"></i> <?php $this->show('No clients'); ?></h2>
+            </div>
+            <?php endif; ?>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label><?php $this->show('Phone'); ?></label>
-        <?= Element::text('issuer[phone]', $issuer->getPhone(), ['class' => 'form-control']); ?>
-    </div>
-
-    <div class="form-group">
-        <label><?php $this->show('Email'); ?></label>
-        <?= Element::text('issuer[email]', $issuer->getEmail(), ['class' => 'form-control']); ?>
-    </div>
-
-    <?php $this->loadPartial('actions', [
-        'new' => !$issuer->getId(),
-        'add' => 'Insurance:Admin:Issuer@addAction',
-        'edit' => 'Insurance:Admin:Issuer@editAction',
-        'save' => 'Insurance:Admin:Issuer@saveAction',
-        'cancel' => 'Insurance:Admin:Issuer@indexAction'
-    ]); ?>
-</form>
+</div>
