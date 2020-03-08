@@ -46,5 +46,10 @@ return [
     
     '/%s/module/insurance/issuer-client/save' => [
         'controller' => 'Admin:IssuerClient@saveAction'
+    ],
+    
+    // Scanner
+    '/insurance/scan/(:var)' => [
+        'controller' => 'Insurance@scanAction'
     ]
 ];
