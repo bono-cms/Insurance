@@ -31,8 +31,23 @@ final class IssuerMapper extends AbstractMapper implements IssuerMapperInterface
      */
     public function fetchAll()
     {
-        $db = $this->db->select('*')
+        // Columns to be selected
+        $columns = [
+            self::column('id'),
+            self::column('phone'),
+            self::column('name'),
+            self::column('email'),
+            self::column('created_at'),
+        ];
+
+        $db = $this->db->select($columns)
+                       ->count(IssuerClientMapper::column('id'), 'clients_count')
                        ->from(self::getTableName())
+                       // Issuer client relation
+                       ->leftJoin(IssuerClientMapper::getTableName(), [
+                            IssuerClientMapper::column('issuer_id') => self::getRawColumn('id')
+                       ])
+                       ->groupBy($columns)
                        ->orderBy('id')
                        ->desc();
 

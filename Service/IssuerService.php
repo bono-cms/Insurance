@@ -48,6 +48,10 @@ final class IssuerService extends AbstractManager
                ->setEmail($row['email'])
                ->setCreatedAt($row['created_at']);
 
+        if (isset($row['clients_count'])) {
+            $entity->setClientsCount($row['clients_count']);
+        }
+
         return $entity;
     }
 
